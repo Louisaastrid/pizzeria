@@ -1,18 +1,15 @@
 import React from "react";
-import { Button, CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
+//import { Button, CssBaseline } from "@material-ui/core";
 import { theme } from "./theme";
+import Header from "../Header";
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <header>
-        <h1>Pizzeria Astrid</h1>
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </header>
+      <Header shoppingCartCount={3} />
     </ThemeProvider>
   );
 }
