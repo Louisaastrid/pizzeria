@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import Price from "../Price";
 
 import { arrayOf, string, number } from "prop-types";
 const imageSize = 175;
@@ -32,7 +33,7 @@ export default function PizzaCard({ name, ingredients, price, imageUrl }) {
           {ingredients.join(", ")}
         </Typography>
         <Typography variant="h4" component="p">
-          {price}
+          <Price value={price} />
         </Typography>
       </CardContent>
     </Card>
