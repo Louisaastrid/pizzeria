@@ -4,20 +4,17 @@ import { ThemeProvider } from "@material-ui/core/styles";
 //import { Button, CssBaseline } from "@material-ui/core";
 import { theme } from "./theme";
 import Header from "../Header";
-import PizzaCard from "../PizzaCard";
+//import PizzaCard from "../PizzaCard";
+import PizzaList from "../PizzaList";
+import db from "../db.json";
 
 export default function App() {
+  const pizzas = db.pizzas;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header shoppingCartCount={3} />
-
-      <PizzaCard
-        name="Reine"
-        ingredients={["Olives", "Tomates", "Champignons"]}
-        imageUrl="https://picsum.photos/350"
-        price={8.99}
-      />
+      <PizzaList data={pizzas} />
     </ThemeProvider>
   );
 }
