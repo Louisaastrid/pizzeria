@@ -1,7 +1,7 @@
 import React from "react";
 import { arrayOf, shape } from "prop-types";
 import PizzaCard from "../PizzaCard";
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { isNilOrEmpty } from "ramda-adjunct";
 
 export default function PizzaList({ data }) {
@@ -12,17 +12,18 @@ export default function PizzaList({ data }) {
       </Typography>
     );
   return (
-    <>
+    <Grid container justify="space-evenly">
       {data.map(({ id, name, ingredients, imageUrl, price }) => (
-        <PizzaCard
-          key={id}
-          name={name}
-          ingredients={ingredients}
-          imageUrl={imageUrl}
-          price={price}
-        />
+        <Grid key={id} item xs={6}>
+          <PizzaCard
+            name={name}
+            ingredients={ingredients}
+            imageUrl={imageUrl}
+            price={price}
+          />
+        </Grid>
       ))}
-    </>
+    </Grid>
   );
 }
 
