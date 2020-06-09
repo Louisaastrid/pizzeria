@@ -8,6 +8,8 @@ import Header from "../Header";
 import PizzaList from "../PizzaList";
 import { useQuery } from "react-query";
 import PopinCart from "../PopinCart";
+import { useList } from "react-use";
+
 const fetechPizzas = () => {
   const baseUrlApi =
     process.env.REACT_APP_BASE_URL_API || "http://localhost:3001";
@@ -19,24 +21,24 @@ export default function App() {
   // const [pizzas, setPizzas] = React.useState([]);
   const { status, data } = useQuery("pizzas", fetechPizzas);
   const [poppinCartOpen, setPopinCardOpen] = React.useState(false);
+  const [cart, { push }] = useList([]);
+
   const displayPopinCart = () => {
     setPopinCardOpen(true);
   };
   const hidePopinCart = () => {
     setPopinCardOpen(false);
   };
-  /* React.useEffect(() => {
-    fetch("http://localhost:3001/pizzas")
-      .then((response) => response.json())
-      .then((pizzas) => setPizzas(pizzas));
-  }, []);*/
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header shoppingCartCount={3} displayPopinCart={displayPopinCart} />
+      <Header
+        shoppingCartCount={cart.length}
+        displayPopinCart={displayPopinCart}
+      />
       {status === "loading" && <CircularProgress />}
-      {status === "success" && <PizzaList data={data} />}
+      {status === "success" && <PizzaList data={data} addToCart={push} />}
       <PopinCart open={poppinCartOpen} hidePopinCart={hidePopinCart} />
     </ThemeProvider>
   );
