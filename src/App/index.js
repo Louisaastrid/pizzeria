@@ -21,7 +21,7 @@ export default function App() {
   // const [pizzas, setPizzas] = React.useState([]);
   const { status, data } = useQuery("pizzas", fetechPizzas);
   const [poppinCartOpen, setPopinCardOpen] = React.useState(false);
-  const [cart, { push }] = useList([]);
+  const [cart, { push, reset }] = useList([]);
 
   const displayPopinCart = () => {
     setPopinCardOpen(true);
@@ -39,7 +39,12 @@ export default function App() {
       />
       {status === "loading" && <CircularProgress />}
       {status === "success" && <PizzaList data={data} addToCart={push} />}
-      <PopinCart open={poppinCartOpen} hidePopinCart={hidePopinCart} />
+      <PopinCart
+        open={poppinCartOpen}
+        hidePopinCart={hidePopinCart}
+        reset={reset}
+        cart={cart}
+      />
     </ThemeProvider>
   );
 }
