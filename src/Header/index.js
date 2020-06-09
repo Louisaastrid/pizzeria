@@ -9,14 +9,14 @@ import {
 //import MailIcon from "@material-ui/icons/Mail";
 import { makeStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { number } from "prop-types";
+import { func, number } from "prop-types";
 
 const useStyles = makeStyles({
   title: {
     flexGrow: 1,
   },
 });
-export default function Header({ shoppingCartCount }) {
+export default function Header({ shoppingCartCount, displayPopinCart }) {
   const classes = useStyles();
 
   return (
@@ -25,7 +25,11 @@ export default function Header({ shoppingCartCount }) {
         <Typography variant="h6" className={classes.title}>
           Pizzeria Astrid
         </Typography>
-        <IconButton aria-label={`${shoppingCartCount} pizza`} color="inherit">
+        <IconButton
+          aria-label={`${shoppingCartCount} pizza`}
+          color="inherit"
+          onClick={displayPopinCart}
+        >
           <Badge badgeContent={shoppingCartCount} color="secondary">
             <ShoppingCartIcon />
           </Badge>
@@ -36,7 +40,9 @@ export default function Header({ shoppingCartCount }) {
 }
 Header.defaultProps = {
   shoppingCartCount: 0,
+  displayPopinCart: Function.prototype,
 };
 Header.propTypes = {
   shoppingCartCount: number,
+  displayPopinCart: func,
 };

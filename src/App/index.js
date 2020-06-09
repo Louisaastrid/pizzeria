@@ -19,7 +19,12 @@ export default function App() {
   // const [pizzas, setPizzas] = React.useState([]);
   const { status, data } = useQuery("pizzas", fetechPizzas);
   const [poppinCartOpen, setPopinCardOpen] = React.useState(false);
-
+  const displayPopinCart = () => {
+    setPopinCardOpen(true);
+  };
+  const hidePopinCart = () => {
+    setPopinCardOpen(false);
+  };
   /* React.useEffect(() => {
     fetch("http://localhost:3001/pizzas")
       .then((response) => response.json())
@@ -29,10 +34,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header shoppingCartCount={3} />
+      <Header shoppingCartCount={3} displayPopinCart={displayPopinCart} />
       {status === "loading" && <CircularProgress />}
       {status === "success" && <PizzaList data={data} />}
-      <PopinCart open={poppinCartOpen} />
+      <PopinCart open={poppinCartOpen} hidePopinCart={hidePopinCart} />
     </ThemeProvider>
   );
 }
